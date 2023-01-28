@@ -26,7 +26,7 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(getLayoutInflater());
 
-        binding.AdminDate.setOnClickListener(new View.OnClickListener() {
+        binding.edAdminHomeDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Calendar c = Calendar.getInstance();
@@ -38,7 +38,7 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
                         int monthDate = i1 + 1;
-                        binding.AdminDate.setText( i2 + "/" + monthDate + "/" + i);
+                        binding.edAdminHomeDate.setText( i2 + "/" + monthDate + "/" + i);
                     }
                 }, year, month, day);
 
@@ -46,7 +46,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        binding.AdminNext.setOnClickListener(new View.OnClickListener() {
+        binding.btnAdminHomeNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                String carName = binding.AdminCarName.getText().toString();

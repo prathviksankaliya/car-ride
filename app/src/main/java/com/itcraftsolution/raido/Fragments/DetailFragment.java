@@ -24,7 +24,7 @@ public class DetailFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentDetailBinding.inflate(getLayoutInflater());
 
-        binding.btnAdd.setOnClickListener(new View.OnClickListener() {
+        binding.btnAdminJourneyAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Chip chip = new Chip(requireContext());
@@ -35,19 +35,19 @@ public class DetailFragment extends Fragment {
                 chip.setClickable(false);
                 chip.setChipIconResource(R.drawable.baseline_location_on_24);
                 chip.setPadding(60, 10, 60, 10);
-                chip.setText(binding.AdminJourneyLocChips.getText());
+                chip.setText(binding.txAdminJourneyLocChips.getText());
                 chip.setOnCloseIconClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        binding.AdminLocationChip.removeView(chip);
+                        binding.chGpAdminLocationChip.removeView(chip);
                     }
                 });
-                binding.AdminLocationChip.addView(chip);
-                binding.AdminJourneyLocChips.setText("");
+                binding.chGpAdminLocationChip.addView(chip);
+                binding.txAdminJourneyLocChips.setText("");
             }
         });
 
-        binding.btnSave.setOnClickListener(new View.OnClickListener() {
+        binding.btnAdminJourneySave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showSelections();
@@ -58,12 +58,12 @@ public class DetailFragment extends Fragment {
 
     private void showSelections()
     {
-        int count = binding.AdminLocationChip.getChildCount();
+        int count = binding.chGpAdminLocationChip.getChildCount();
 
         String s = null;
         for(int i = 0; i < count; i++)
         {
-            Chip chip = (Chip) binding.AdminLocationChip.getChildAt(i);
+            Chip chip = (Chip) binding.chGpAdminLocationChip.getChildAt(i);
             if(s == null)
             {
                     s = chip.getText().toString();
