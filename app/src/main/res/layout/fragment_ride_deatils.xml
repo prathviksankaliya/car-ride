@@ -25,7 +25,7 @@
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/txRideUserName"
+        android:id="@+id/txRideDetailUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_8mdp"
@@ -44,12 +44,12 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/_8mdp"
         android:src="@drawable/fillstar24"
-        app:layout_constraintBottom_toBottomOf="@+id/txRideUserName"
-        app:layout_constraintEnd_toStartOf="@+id/txRideUserRating"
-        app:layout_constraintTop_toTopOf="@+id/txRideUserName" />
+        app:layout_constraintBottom_toBottomOf="@+id/txRideDetailUserName"
+        app:layout_constraintEnd_toStartOf="@+id/txRideDetailUserRating"
+        app:layout_constraintTop_toTopOf="@+id/txRideDetailUserName" />
 
     <TextView
-        android:id="@+id/txRideUserRating"
+        android:id="@+id/txRideDetailUserRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/_12mdp"
@@ -67,7 +67,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_8mdp"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="@+id/txRideUserRating"
+        app:layout_constraintEnd_toEndOf="@+id/txRideDetailUserRating"
         app:layout_constraintStart_toStartOf="@+id/cardView"
         app:layout_constraintTop_toBottomOf="@+id/cardView">
 
@@ -126,12 +126,12 @@
                 android:fontFamily="@font/opensanssemibold"
                 android:text="Car Number"
                 android:textSize="@dimen/_15font_mdp"
-                app:layout_constraintEnd_toEndOf="@+id/textView3"
+                app:layout_constraintEnd_toEndOf="@+id/txAdminHomeRate"
                 app:layout_constraintStart_toEndOf="@+id/textView14"
                 app:layout_constraintTop_toTopOf="@+id/textView14" />
 
             <TextView
-                android:id="@+id/txRideCarNumber"
+                android:id="@+id/txRideDetailCarNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/_6mdp"
@@ -187,7 +187,7 @@
             app:layout_constraintTop_toTopOf="@+id/imageView2" />
 
         <TextView
-            android:id="@+id/txUserRideSource"
+            android:id="@+id/txUserRideDetailSource"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/opensansbold"
@@ -218,7 +218,7 @@
             app:layout_constraintTop_toTopOf="@+id/imageView2" />
 
         <TextView
-            android:id="@+id/txUserRideArrive"
+            android:id="@+id/txUserRideDetailArrive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/opensansbold"
@@ -267,7 +267,7 @@
             app:layout_constraintTop_toTopOf="@+id/imageView2" />
 
         <TextView
-            android:id="@+id/txUserRideDestination"
+            android:id="@+id/txUserRideDetailDestination"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/opensansbold"
@@ -298,7 +298,7 @@
             app:layout_constraintTop_toTopOf="@+id/imageView2" />
 
         <TextView
-            android:id="@+id/txUserRideDep"
+            android:id="@+id/txUserRideDetailDep"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/opensansbold"
@@ -322,7 +322,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout9" />
 
     <com.google.android.material.chip.ChipGroup
-        android:id="@+id/RideLocationChips"
+        android:id="@+id/chGpRideDetailLocationChips"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_8mdp"
@@ -341,7 +341,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/btnCall"
+            android:id="@+id/btnRideDetailCall"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -353,7 +353,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-            android:id="@+id/btnConfirmSeats"
+            android:id="@+id/btnRideDetailConfirmSeats"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_8mdp"

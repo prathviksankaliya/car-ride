@@ -34,7 +34,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/AdminSource"
+            android:id="@+id/txAdminJourneySource"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="@font/opensanssemibold"
@@ -56,7 +56,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/AdminDestination"
+            android:id="@+id/txAdminJourneyDestination"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="@font/opensanssemibold"
@@ -73,12 +73,12 @@
         android:layout_marginEnd="@dimen/_8mdp"
         android:hint="Journey locations"
         android:textColorHint="@color/lightBlack"
-        app:layout_constraintEnd_toStartOf="@+id/btnAdd"
+        app:layout_constraintEnd_toStartOf="@+id/btnAdminJourneyAdd"
         app:layout_constraintStart_toStartOf="@+id/textInputLayout6"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout6">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/AdminJourneyLocChips"
+            android:id="@+id/txAdminJourneyLocChips"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="@font/opensanssemibold"
@@ -87,7 +87,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/btnAdd"
+        android:id="@+id/btnAdminJourneyAdd"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:text="Add"
@@ -97,26 +97,26 @@
         app:layout_constraintTop_toTopOf="@+id/textInputLayout7" />
 
     <com.google.android.material.chip.ChipGroup
-        android:id="@+id/AdminLocationChip"
+        android:id="@+id/chGpAdminLocationChip"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_16mdp"
-        app:layout_constraintEnd_toEndOf="@+id/btnAdd"
+        app:layout_constraintEnd_toEndOf="@+id/btnAdminJourneyAdd"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/textInputLayout7"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout7" />
 
     <Button
-        android:id="@+id/btnSave"
+        android:id="@+id/btnAdminJourneySave"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:paddingVertical="@dimen/_9mdp"
+        android:paddingVertical="@dimen/_10mdp"
         android:text="Save"
         android:fontFamily="@font/opensansbold"
         android:layout_marginTop="@dimen/_20mdp"
-        app:layout_constraintEnd_toEndOf="@+id/AdminLocationChip"
-        app:layout_constraintStart_toStartOf="@+id/AdminLocationChip"
-        app:layout_constraintTop_toBottomOf="@+id/AdminLocationChip" />
+        app:layout_constraintEnd_toEndOf="@+id/chGpAdminLocationChip"
+        app:layout_constraintStart_toStartOf="@+id/chGpAdminLocationChip"
+        app:layout_constraintTop_toBottomOf="@+id/chGpAdminLocationChip" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,7 +7,7 @@
     tools:context=".Fragments.UserProfileFragment">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/igUserProfileBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_14mdp"
@@ -28,13 +28,13 @@
         android:text="User Profile Details"
         android:textColor="@color/black"
         android:textSize="@dimen/_18font_mdp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintBottom_toBottomOf="@+id/igUserProfileBack"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView" />
+        app:layout_constraintStart_toEndOf="@+id/igUserProfileBack"
+        app:layout_constraintTop_toTopOf="@+id/igUserProfileBack" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/igAdminProfilePic"
+        android:id="@+id/igUserProfilePic"
         android:layout_width="@dimen/_120mdp"
         android:layout_height="@dimen/_120mdp"
         android:layout_marginTop="@dimen/_20mdp"
@@ -53,9 +53,9 @@
         android:text="Prathvik Sankaliya"
         android:textColor="@color/black"
         android:textSize="@dimen/_20font_mdp"
-        app:layout_constraintEnd_toEndOf="@+id/igAdminProfilePic"
-        app:layout_constraintStart_toStartOf="@+id/igAdminProfilePic"
-        app:layout_constraintTop_toBottomOf="@+id/igAdminProfilePic" />
+        app:layout_constraintEnd_toEndOf="@+id/igUserProfilePic"
+        app:layout_constraintStart_toStartOf="@+id/igUserProfilePic"
+        app:layout_constraintTop_toBottomOf="@+id/igUserProfilePic" />
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -68,11 +68,11 @@
         android:textColorHint="@color/lightBlack"
         app:layout_constraintEnd_toEndOf="@+id/textView6"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/igUserProfileBack"
         app:layout_constraintTop_toBottomOf="@+id/txAdminUserName">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edAdminUserName"
+            android:id="@+id/edUserName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="@font/opensanssemibold"
@@ -93,7 +93,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edAdminPhone"
+            android:id="@+id/edUserNumber"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="@font/opensanssemibold"
@@ -114,7 +114,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edAdminEmail"
+            android:id="@+id/edUserEmail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="@font/opensanssemibold"
@@ -124,7 +124,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/btnAdminProfile"
+       android:id="@+id/btnUserSaveProfile"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:paddingVertical="@dimen/_10mdp"

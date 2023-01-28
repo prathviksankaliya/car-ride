@@ -7,7 +7,7 @@
     tools:context=".Fragments.NotificationFragment">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/igAdminNotificationBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_14mdp"
@@ -27,10 +27,10 @@
         android:text="Notifications"
         android:textColor="@color/black"
         android:textSize="@dimen/_18font_mdp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintBottom_toBottomOf="@+id/igAdminNotificationBack"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView" />
+        app:layout_constraintStart_toEndOf="@+id/igAdminNotificationBack"
+        app:layout_constraintTop_toTopOf="@+id/igAdminNotificationBack" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvAdminNotification"

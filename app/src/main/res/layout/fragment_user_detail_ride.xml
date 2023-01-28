@@ -7,7 +7,7 @@
     tools:context=".Fragments.UserDetailRideFragment">
 
     <ImageView
-        android:id="@+id/igRideBack"
+        android:id="@+id/igActiveRideBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_14mdp"
@@ -27,10 +27,10 @@
         android:text="Active Rides"
         android:textColor="@color/black"
         android:textSize="@dimen/_18font_mdp"
-        app:layout_constraintBottom_toBottomOf="@+id/igRideBack"
+        app:layout_constraintBottom_toBottomOf="@+id/igActiveRideBack"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/igRideBack"
-        app:layout_constraintTop_toTopOf="@+id/igRideBack" />
+        app:layout_constraintStart_toEndOf="@+id/igActiveRideBack"
+        app:layout_constraintTop_toTopOf="@+id/igActiveRideBack" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvActiveRide"
