@@ -8,19 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.itcraftsolution.raido.R;
-import com.itcraftsolution.raido.databinding.FragmentNotificationBinding;
+import com.itcraftsolution.raido.databinding.FragmentUserRideDeatilsBinding;
 
+public class UserRideDeatilsFragment extends Fragment {
 
-public class NotificationFragment extends Fragment {
+    private FragmentUserRideDeatilsBinding binding;
 
-    private FragmentNotificationBinding binding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentNotificationBinding.inflate(getLayoutInflater());
+        binding = FragmentUserRideDeatilsBinding.inflate(getLayoutInflater());
 
         return binding.getRoot();
     }

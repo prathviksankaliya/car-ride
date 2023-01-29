@@ -8,18 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.itcraftsolution.raido.R;
-import com.itcraftsolution.raido.databinding.FragmentProfileBinding;
+import com.itcraftsolution.raido.databinding.FragmentAgentNotificationBinding;
 
-public class ProfileFragment extends Fragment {
 
-    private FragmentProfileBinding binding;
+public class AgentNotificationFragment extends Fragment {
+
+    private FragmentAgentNotificationBinding binding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentProfileBinding.inflate(getLayoutInflater());
+        binding = FragmentAgentNotificationBinding.inflate(getLayoutInflater());
 
         return binding.getRoot();
     }

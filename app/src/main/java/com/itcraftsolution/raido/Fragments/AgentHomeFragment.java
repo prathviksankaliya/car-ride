@@ -11,20 +11,20 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 
 import com.itcraftsolution.raido.R;
-import com.itcraftsolution.raido.databinding.FragmentHomeBinding;
+import com.itcraftsolution.raido.databinding.FragmentAgentDetailBinding;
+import com.itcraftsolution.raido.databinding.FragmentAgentHomeBinding;
 
 import java.util.Calendar;
-import java.util.Date;
 
-public class HomeFragment extends Fragment {
+public class AgentHomeFragment extends Fragment {
 
-    private FragmentHomeBinding binding;
+    private FragmentAgentHomeBinding binding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentHomeBinding.inflate(getLayoutInflater());
+        binding = FragmentAgentHomeBinding.inflate(getLayoutInflater());
 
         binding.edAdminHomeDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +55,7 @@ public class HomeFragment extends Fragment {
 //                String date = binding.AdminDate.getText().toString();
 //                int emptySeat = Integer.parseInt(binding.AdminSeats.getText().toString());
 //                int totalJourney = Integer.parseInt(binding.AdminHours.getText().toString());
-                getParentFragmentManager().beginTransaction().replace(R.id.frMainContainer, new DetailFragment()).addToBackStack(null).commit();
+                getParentFragmentManager().beginTransaction().replace(R.id.frMainContainer, new AgentDetailFragment()).addToBackStack(null).commit();
             }
         });
 

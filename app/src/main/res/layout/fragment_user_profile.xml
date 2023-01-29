@@ -44,6 +44,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
+    <ImageView
+        android:id="@+id/igUserEditPic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_bg"
+        android:padding="@dimen/_5mdp"
+        android:src="@drawable/ic_baseline_edit_24"
+        app:layout_constraintBottom_toBottomOf="@+id/igUserProfilePic"
+        app:layout_constraintEnd_toEndOf="@+id/igUserProfilePic"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintStart_toStartOf="@+id/igUserProfilePic"
+        app:layout_constraintTop_toTopOf="@+id/igUserProfilePic"
+        app:layout_constraintVertical_bias="0.95" />
+
     <TextView
         android:id="@+id/txAdminUserName"
         android:layout_width="wrap_content"

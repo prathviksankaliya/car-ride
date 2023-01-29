@@ -8,19 +8,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.itcraftsolution.raido.R;
-import com.itcraftsolution.raido.databinding.FragmentRideDeatilsBinding;
+import com.itcraftsolution.raido.databinding.FragmentAgentProfileBinding;
 
-public class RideDeatilsFragment extends Fragment {
+public class AgentProfileFragment extends Fragment {
 
-    private FragmentRideDeatilsBinding binding;
-
+    private FragmentAgentProfileBinding binding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentRideDeatilsBinding.inflate(getLayoutInflater());
+        binding = FragmentAgentProfileBinding.inflate(getLayoutInflater());
 
         return binding.getRoot();
     }

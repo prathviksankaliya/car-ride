@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.ProfileFragment">
+    tools:context=".Fragments.AgentProfileFragment">
 
     <ImageView
         android:id="@+id/igAdminProfileBack"
@@ -42,6 +42,20 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <ImageView
+        android:id="@+id/igAgentEditPic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_bg"
+        android:padding="@dimen/_5mdp"
+        android:src="@drawable/ic_baseline_edit_24"
+        app:layout_constraintBottom_toBottomOf="@+id/igAdminProfilePic"
+        app:layout_constraintEnd_toEndOf="@+id/igAdminProfilePic"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintStart_toStartOf="@+id/igAdminProfilePic"
+        app:layout_constraintTop_toTopOf="@+id/igAdminProfilePic"
+        app:layout_constraintVertical_bias="0.95" />
 
     <TextView
         android:id="@+id/txAdminUserName"

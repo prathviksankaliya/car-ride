@@ -12,17 +12,17 @@ import android.widget.Toast;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipDrawable;
 import com.itcraftsolution.raido.R;
-import com.itcraftsolution.raido.databinding.FragmentDetailBinding;
+import com.itcraftsolution.raido.databinding.FragmentAgentDetailBinding;
 
-public class DetailFragment extends Fragment {
+public class AgentDetailFragment extends Fragment {
 
-    private FragmentDetailBinding binding;
+    private FragmentAgentDetailBinding binding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentDetailBinding.inflate(getLayoutInflater());
+        binding = FragmentAgentDetailBinding.inflate(getLayoutInflater());
 
         binding.btnAdminJourneyAdd.setOnClickListener(new View.OnClickListener() {
             @Override
