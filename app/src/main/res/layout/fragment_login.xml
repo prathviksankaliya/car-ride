@@ -87,6 +87,7 @@
                 android:paddingHorizontal="@dimen/_3mdp"
                 android:paddingVertical="@dimen/_3mdp"
                 android:textColor="@color/green"
+                android:visibility="gone"
                 app:bar_active_color="@color/green"
                 app:bar_enabled="true"
                 app:bar_height="2dp"
