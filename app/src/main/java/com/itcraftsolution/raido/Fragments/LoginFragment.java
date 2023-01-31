@@ -35,6 +35,7 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import com.itcraftsolution.raido.R;
 import com.itcraftsolution.raido.databinding.FragmentLoginBinding;
 
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class LoginFragment extends Fragment {
@@ -58,23 +59,27 @@ public class LoginFragment extends Fragment {
         createGoogleRequest();
         auth = FirebaseAuth.getInstance();
 
-        binding.btnLoginOtp.setOnClickListener(new View.OnClickListener() {
+        binding.btnGetOtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                userNumber = binding.edLoginPhoneNumber.getText().toString();
-                binding.otpView.setVisibility(View.VISIBLE);
-                binding.btnLoginOtp.setText("Verify OTP");
+                if (binding.edLoginPhoneNumber.getText().toString().length() != 10) {
+                    binding.edLoginPhoneNumber.setError("Plz Enter Valid Number!!");
+                } else {
+                    userNumber = "+91 " + binding.edLoginPhoneNumber.getText().toString();
+                    binding.llVerifyOtp.setVisibility(View.VISIBLE);
+                    binding.llGetOpt.setVisibility(View.GONE);
                     sendVerificationCode(userNumber);
-                    if(binding.btnLoginOtp.getText().toString().equals("Verify OTP"))
-                    {
-                        if(checkOtp())
-                        {
-                            verifyCode(binding.otpView.getOTP(), userNumber);
-                        }
-                    }
+                }
+            }
+        });
 
-//                getParentFragmentManager().beginTransaction().replace(R.id.frLoginContainer,
-//                        new LoginProfileFragment()).addToBackStack(null).commit();
+        binding.btnVerifyOtp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (checkOtp()) {
+                    verifyCode(binding.otpView.getOTP());
+                }
+
             }
         });
 
@@ -90,11 +95,10 @@ public class LoginFragment extends Fragment {
             public void onActivityResult(ActivityResult result) {
                 if (result.getResultCode() == Activity.RESULT_OK) {
                     Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(result.getData());
-                    try{
+                    try {
                         GoogleSignInAccount account = task.getResult(ApiException.class);
                         signInWithGoogleAccount(account);
-                    }catch (ApiException a)
-                    {
+                    } catch (ApiException a) {
 
                     }
                 }
@@ -117,24 +121,24 @@ public class LoginFragment extends Fragment {
         signInActivityLauncher.launch(intent);
     }
 
-    private void signInWithGoogleAccount(GoogleSignInAccount account){
+    private void signInWithGoogleAccount(GoogleSignInAccount account) {
         AuthCredential authCredential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         auth.signInWithCredential(authCredential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful())
-                    {
-                        Toast.makeText(requireContext(), "Email: "+ account.getEmail(), Toast.LENGTH_SHORT).show();
-                    }
+                if (task.isSuccessful()) {
+                    getParentFragmentManager().beginTransaction().replace(R.id.frLoginContainer,
+                            new LoginProfileFragment()).addToBackStack(null).commit();
+                    Toast.makeText(requireContext(), "Email: " + account.getEmail(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
 
 
     // Sign In with Phone Number
-    private void sendVerificationCode(String phoneNumber)
-    {
-        PhoneAuthOptions options =PhoneAuthOptions.newBuilder(auth).
+    private void sendVerificationCode(String phoneNumber) {
+        PhoneAuthOptions options = PhoneAuthOptions.newBuilder(auth).
                 setActivity(requireActivity())
                 .setPhoneNumber(phoneNumber)
                 .setCallbacks(callbacks)
@@ -143,50 +147,52 @@ public class LoginFragment extends Fragment {
         PhoneAuthProvider.verifyPhoneNumber(options);
     }
 
-    private PhoneAuthProvider.OnVerificationStateChangedCallbacks callbacks =new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+    private PhoneAuthProvider.OnVerificationStateChangedCallbacks callbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
         @Override
         public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
 
-                final  String code = phoneAuthCredential.getSmsCode();
-                if(code != null)
-                {
-                    binding.otpView.setOTP(code);
-                    verifyCode(code, userNumber);
-                }
+            final String code = phoneAuthCredential.getSmsCode();
+            if (code != null) {
+                binding.otpView.setOTP(code);
+                verifyCode(code);
+            }
         }
 
         @Override
         public void onVerificationFailed(@NonNull FirebaseException e) {
+            Toast.makeText(requireContext(), "" + e.toString(), Toast.LENGTH_SHORT).show();
 
         }
 
         @Override
         public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
             super.onCodeSent(s, forceResendingToken);
-                verifyId = s;
+            verifyId = s;
         }
     };
 
-    private void verifyCode(String code, String phone){
+    private void verifyCode(String code) {
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verifyId, code);
         signInWithCredential(credential);
     }
 
-    private void signInWithCredential(PhoneAuthCredential credential){
+    private void signInWithCredential(PhoneAuthCredential credential) {
         auth.signInWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful())
-                    {
-                        Toast.makeText(requireContext(), "Phone: "+ userNumber, Toast.LENGTH_SHORT).show();
-                    }
+                if (task.isSuccessful()) {
+                    getParentFragmentManager().beginTransaction().replace(R.id.frLoginContainer,
+                            new LoginProfileFragment()).addToBackStack(null).commit();
+                } else {
+                    Toast.makeText(requireContext(), "" + Objects.requireNonNull(task.getException()).toString(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
+
     private boolean checkOtp() {
         boolean condition = true;
-        if(binding.otpView.getOTP().length() != 6)
-        {
+        if (binding.otpView.getOTP().length() != 6) {
             Toast.makeText(getContext(), "Fill The OTP", Toast.LENGTH_SHORT).show();
             condition = false;
         }

@@ -26,7 +26,7 @@ public class SplashFragment extends Fragment {
             @Override
             public void run() {
                 getParentFragmentManager().beginTransaction().replace(R.id.frLoginContainer,
-                        new LoginFragment()).addToBackStack(null).commit();
+                        new LoginProfileFragment()).addToBackStack(null).commit();
             }
         }, 1100);
         return binding.getRoot();
