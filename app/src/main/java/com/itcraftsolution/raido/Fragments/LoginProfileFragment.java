@@ -18,21 +18,29 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.util.Base64;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.material.snackbar.Snackbar;
 import com.itcraftsolution.raido.Activity.MainActivity;
 import com.itcraftsolution.raido.R;
 import com.itcraftsolution.raido.databinding.FragmentLoginProfileBinding;
+import com.itcraftsolution.raido.spf.SpfUserData;
 import com.yalantis.ucrop.UCrop;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.Objects;
 import java.util.UUID;
+import java.util.regex.Pattern;
 
 public class LoginProfileFragment extends Fragment {
 
@@ -41,33 +49,74 @@ public class LoginProfileFragment extends Fragment {
     private Uri photoUri;
     private static final int PERMISSION_ID = 44;
     private String destPath, encodedImageString;
+    private String gender = "Male";
     private Bitmap bitmap;
     private boolean checkImage = false;
+    private GoogleSignInAccount account;
+    private SpfUserData spfUserData;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentLoginProfileBinding.inflate(getLayoutInflater());
+        spfUserData = new SpfUserData(requireContext());
+        displayLoginDetails();
+
         binding.btnLoginSaveProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(binding.edLoginName.getText().toString().length() <= 2)
+                if(Objects.requireNonNull(binding.edLoginName.getText()).toString().length() <= 2)
                 {
                     Snackbar.make(binding.loginProfileMainLayout,"Name must be Minimum 3 characters", Snackbar.LENGTH_LONG)
                             .setBackgroundTint(getResources().getColor(R.color.red))
                             .setTextColor(getResources().getColor(R.color.white))
                             .show();
                     binding.edLoginName.requestFocus();
-                }else if(binding.igLoginPic.getDrawable() == null)
+                }else if(!checkImage || binding.igLoginPic.getDrawable() == null)
                 {
                     Snackbar.make(binding.loginProfileMainLayout,"Please set your profile picture", Snackbar.LENGTH_LONG)
                             .setBackgroundTint(getResources().getColor(R.color.red))
                             .setTextColor(getResources().getColor(R.color.white))
                             .show();
                     binding.igLoginPic.requestFocus();
+                }else if(Objects.requireNonNull(binding.edLoginPhoneNumber.getText()).toString().length() != 10)
+                {
+                    Snackbar.make(binding.loginProfileMainLayout,"Please 10 digit Number", Snackbar.LENGTH_LONG)
+                            .setBackgroundTint(getResources().getColor(R.color.red))
+                            .setTextColor(getResources().getColor(R.color.white))
+                            .show();
+                    binding.edLoginPhoneNumber.requestFocus();
+                }else if(!validEmail(Objects.requireNonNull(binding.edLoginEmail.getText()).toString()))
+                {
+                    Snackbar.make(binding.loginProfileMainLayout,"Please Enter Valid Email", Snackbar.LENGTH_LONG)
+                            .setBackgroundTint(getResources().getColor(R.color.red))
+                            .setTextColor(getResources().getColor(R.color.white))
+                            .show();
+                    binding.igLoginPic.requestFocus();
+                }else {
+                    String userName = binding.edLoginName.getText().toString();
+                    String userPhone = binding.edLoginPhoneNumber.getText().toString();
+                    String userEmail = binding.edLoginEmail.getText().toString();
+                    spfUserData.setSpfUserLoginDetails(userName, encodedImageString, userEmail, userPhone, gender);
+//                    getParentFragmentManager().beginTransaction().replace(R.id.frLoginContainer, new demoFragment()).commit();
+
                 }
+
 //                startActivity(new Intent(requireContext(), MainActivity.class));
+            }
+        });
+
+        binding.loginRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                int checkRadioBtnId = radioGroup.getCheckedRadioButtonId();
+
+                RadioButton radioButton = radioGroup.findViewById(checkRadioBtnId);
+                if(radioButton.isChecked())
+                {
+                    gender = radioButton.getText().toString();
+                }
             }
         });
 
@@ -107,7 +156,7 @@ public class LoginProfileFragment extends Fragment {
                         InputStream inputStream = requireContext().getContentResolver().openInputStream(photoUri);
                         bitmap = BitmapFactory.decodeStream(inputStream);
                         encodeBitmapImageString(bitmap);
-                        checkImage = true;
+
 
                     } catch (FileNotFoundException e) {
                         throw new RuntimeException(e);
@@ -133,5 +182,35 @@ public class LoginProfileFragment extends Fragment {
         binding.igLoginPic.setImageBitmap(bitmap);
         byte[] bytesOfImage =byteArrayOutputStream.toByteArray();
         encodedImageString = android.util.Base64.encodeToString(bytesOfImage, Base64.DEFAULT);
+        checkImage = true;
+    }
+
+    private boolean validEmail(String email)
+    {
+        Pattern pattern = Patterns.EMAIL_ADDRESS;
+        return pattern.matcher(email).matches();
+    }
+
+    private void displayLoginDetails()
+    {
+        GoogleSignIn.getLastSignedInAccount(requireContext());
+        account = GoogleSignIn.getLastSignedInAccount(requireContext());
+
+        String loginPhoneNumber = spfUserData.getSpfUserLoginDetails().getString("userPhone", null);
+        if(account != null)
+        {
+            binding.edLoginName.setText(account.getDisplayName());
+            binding.edLoginEmail.setText(account.getEmail());
+            binding.textInputLayout8.setFocusable(false);
+        }else{
+            binding.edLoginPhoneNumber.setText(loginPhoneNumber);
+            binding.textInputLayout.setFocusable(false);
+        }
+    }
+    private void encodeImageStringBitmap(String encodeImageString)
+    {
+        byte[] encodeBytes = android.util.Base64.decode(encodeImageString, Base64.DEFAULT);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(encodeBytes, 0, encodeBytes.length);
+        binding.igLoginPic.setImageBitmap(bitmap);
     }
 }

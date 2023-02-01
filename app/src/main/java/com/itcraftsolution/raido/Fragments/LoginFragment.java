@@ -34,6 +34,7 @@ import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.itcraftsolution.raido.R;
 import com.itcraftsolution.raido.databinding.FragmentLoginBinding;
+import com.itcraftsolution.raido.spf.SpfUserData;
 
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -45,6 +46,7 @@ public class LoginFragment extends Fragment {
     private ActivityResultLauncher<Intent> signInActivityLauncher;
     private FirebaseAuth auth;
     private String userNumber, verifyId;
+    private SpfUserData spfUserData;
 
     public LoginFragment() {
     }
@@ -57,6 +59,7 @@ public class LoginFragment extends Fragment {
         binding = FragmentLoginBinding.inflate(getLayoutInflater());
 
         createGoogleRequest();
+        spfUserData = new SpfUserData(requireContext());
         auth = FirebaseAuth.getInstance();
 
         binding.btnGetOtp.setOnClickListener(new View.OnClickListener() {
@@ -181,6 +184,7 @@ public class LoginFragment extends Fragment {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
+                    spfUserData.setSpfUserLoginDetails(null, null, null, userNumber, null);
                     getParentFragmentManager().beginTransaction().replace(R.id.frLoginContainer,
                             new LoginProfileFragment()).addToBackStack(null).commit();
                 } else {
@@ -198,4 +202,6 @@ public class LoginFragment extends Fragment {
         }
         return condition;
     }
+
+
 }
