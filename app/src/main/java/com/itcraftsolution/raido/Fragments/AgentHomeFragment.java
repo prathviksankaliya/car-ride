@@ -18,12 +18,15 @@ import com.itcraftsolution.raido.R;
 import com.itcraftsolution.raido.databinding.FragmentAgentHomeBinding;
 import com.itcraftsolution.raido.spf.SpfUserData;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class AgentHomeFragment extends Fragment {
 
     private FragmentAgentHomeBinding binding;
-    private String [] spTime = {"Minutes ", "Hours", "Days"};
+    private String [] spTime = {"Hours ", "Minutes", "Days"};
     private String time;
     private SpfUserData spfUserData;
 
@@ -34,7 +37,9 @@ public class AgentHomeFragment extends Fragment {
         binding = FragmentAgentHomeBinding.inflate(getLayoutInflater());
 
         spinnerTime();
+
         spfUserData = new SpfUserData(requireContext());
+
         binding.edAdminHomeDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,8 +81,8 @@ public class AgentHomeFragment extends Fragment {
                             .setTextColor(getResources().getColor(R.color.white))
                             .show();
                     binding.edAdminNumber.requestFocus();
-                }else if(binding.edAdminHomeDate.getText().toString().isEmpty()){
-                    Snackbar.make(binding.agentHomeMainLayout,"Set the Date", Snackbar.LENGTH_LONG)
+                }else if(binding.edAdminHomeDate.getText().toString().length() < 8){
+                    Snackbar.make(binding.agentHomeMainLayout,"Click and Set the Date", Snackbar.LENGTH_LONG)
                             .setBackgroundTint(getResources().getColor(R.color.red))
                             .setTextColor(getResources().getColor(R.color.white))
                             .show();
@@ -108,7 +113,7 @@ public class AgentHomeFragment extends Fragment {
 //                            "Empty Seats : " + emptySeat +"\n" +
 //                            "total Journey : " + totalJourney +"\n" +
 //                            "time : " + time +"\n");
-                    spfUserData.setSpfAgentRideDetails(carName, vehicleNumber, phoneNumber, date, emptySeat, totalJourney, time);
+                    spfUserData.setSpfAgentRideDetails(carName, vehicleNumber, phoneNumber, date, emptySeat, totalJourney, time, null, null, null, null);
                     getParentFragmentManager().beginTransaction().replace(R.id.frMainContainer, new AgentDetailFragment()).addToBackStack(null).commit();
 
                 }
@@ -126,7 +131,6 @@ public class AgentHomeFragment extends Fragment {
         binding.spAdminTime.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(requireContext(), ""+ spTime[i], Toast.LENGTH_SHORT).show();
                 time = spTime[i];
             }
 
@@ -135,5 +139,9 @@ public class AgentHomeFragment extends Fragment {
 
             }
         });
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        String currentDate = simpleDateFormat.format(new Date());
+        binding.edAdminHomeDate.setText(currentDate);
     }
 }

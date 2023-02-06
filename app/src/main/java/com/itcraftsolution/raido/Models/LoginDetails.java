@@ -1,14 +1,23 @@
 package com.itcraftsolution.raido.Models;
 
 public class LoginDetails {
-    private String userName, userImage, userEmail, userPhone, userGender;
+    private String userName, userImage, userEmail, userPhone,userType,  userGender;
 
-    public LoginDetails(String userName, String userImage, String userEmail, String userPhone, String userGender) {
+    public LoginDetails(String userName, String userImage, String userEmail, String userPhone,String userType ,String userGender) {
         this.userName = userName;
         this.userImage = userImage;
         this.userEmail = userEmail;
         this.userPhone = userPhone;
         this.userGender = userGender;
+        this.userType = userType;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 
     public LoginDetails() {

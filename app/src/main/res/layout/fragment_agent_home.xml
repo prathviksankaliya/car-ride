@@ -237,10 +237,15 @@
                 android:fontFamily="@font/opensansbold"
                 android:paddingVertical="@dimen/_9mdp"
                 android:text="Next"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/linearLayout12"
                 app:layout_constraintStart_toStartOf="@+id/linearLayout12"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout12" />
 
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+<!--
             <TextView
                 android:id="@+id/txResult"
                 android:layout_width="wrap_content"
@@ -252,6 +257,4 @@
                 app:layout_constraintEnd_toEndOf="@+id/btnAdminHomeNext"
                 app:layout_constraintStart_toStartOf="@+id/btnAdminHomeNext"
                 app:layout_constraintTop_toBottomOf="@+id/btnAdminHomeNext" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+-->
