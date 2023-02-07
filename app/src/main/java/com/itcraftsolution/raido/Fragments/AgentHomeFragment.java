@@ -1,8 +1,10 @@
 package com.itcraftsolution.raido.Fragments;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -13,7 +15,15 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.itcraftsolution.raido.Models.LoginDetails;
 import com.itcraftsolution.raido.R;
 import com.itcraftsolution.raido.databinding.FragmentAgentHomeBinding;
 import com.itcraftsolution.raido.spf.SpfUserData;
@@ -22,6 +32,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 public class AgentHomeFragment extends Fragment {
 
@@ -29,6 +40,10 @@ public class AgentHomeFragment extends Fragment {
     private String [] spTime = {"Hours ", "Minutes", "Days"};
     private String time;
     private SpfUserData spfUserData;
+    private FirebaseAuth auth;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;
+    private ProgressDialog dialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,9 +51,17 @@ public class AgentHomeFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentAgentHomeBinding.inflate(getLayoutInflater());
 
-        spinnerTime();
-
+        auth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("LoginDetails");
         spfUserData = new SpfUserData(requireContext());
+
+        dialog = new ProgressDialog(requireContext());
+        dialog.setMessage("Loading Profile...");
+        dialog.setCancelable(false);
+        dialog.show();
+        loadProfileData();
+
 
         binding.edAdminHomeDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,5 +166,33 @@ public class AgentHomeFragment extends Fragment {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         String currentDate = simpleDateFormat.format(new Date());
         binding.edAdminHomeDate.setText(currentDate);
+    }
+
+    private void loadProfileData(){
+        databaseReference.child("AgentLoginDetails").child(Objects.requireNonNull(auth.getCurrentUser()).getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                LoginDetails loginDetails = snapshot.getValue(LoginDetails.class);
+                if(loginDetails != null){
+                    Glide.with(requireContext()).load(loginDetails.getUserImage()).into(binding.igAdminHomePic);
+                    binding.txAdminHomeName.setText(loginDetails.getUserName());
+                    binding.txAdminHomeRate.setText(String.valueOf(loginDetails.getUserRating()));
+
+                    spfUserData.setSpfUserLoginDetails(loginDetails.getUserName(), loginDetails.getUserImage(),
+                            loginDetails.getUserEmail(), loginDetails.getUserPhone(), loginDetails.getUserType(), loginDetails.getUserGender());
+                            dialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                dialog.dismiss();
+                Toast.makeText(requireContext(), ""+error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
+        spinnerTime();
+
     }
 }

@@ -42,7 +42,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.itcraftsolution.raido.Activity.AgentRideActivity;
 import com.itcraftsolution.raido.Activity.MainActivity;
+import com.itcraftsolution.raido.Activity.UserRideActivity;
 import com.itcraftsolution.raido.Models.LoginDetails;
 import com.itcraftsolution.raido.R;
 import com.itcraftsolution.raido.databinding.FragmentLoginProfileBinding;
@@ -253,7 +255,7 @@ public class LoginProfileFragment extends Fragment {
                         storageReference.child(auth.getCurrentUser().getUid()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                loginDetails = new LoginDetails(userName, String.valueOf(uri), userEmail, userPhone,userType, gender);
+                                loginDetails = new LoginDetails(userName, String.valueOf(uri), userEmail, userPhone,userType,0, gender);
                                 addDataToFirebaseDatabase(userType);
 
                             }
@@ -290,7 +292,7 @@ public class LoginProfileFragment extends Fragment {
                     {
                         Toast.makeText(requireContext(), "Login Successfully!!", Toast.LENGTH_LONG).show();
                         dialog.dismiss();
-                        startActivity(new Intent(requireContext(), MainActivity.class));
+                        startActivity(new Intent(requireContext(), AgentRideActivity.class));
                         requireActivity().finishAffinity();
                     }
                 }
@@ -309,7 +311,7 @@ public class LoginProfileFragment extends Fragment {
                     {
                         Toast.makeText(requireContext(), "Login Successfully!!", Toast.LENGTH_LONG).show();
                         dialog.dismiss();
-                        startActivity(new Intent(requireContext(), MainActivity.class));
+                        startActivity(new Intent(requireContext(), UserRideActivity.class));
                         requireActivity().finishAffinity();
                     }
                 }
