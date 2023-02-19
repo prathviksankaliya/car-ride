@@ -136,7 +136,7 @@ public class AgentHomeFragment extends Fragment {
 //                            "Empty Seats : " + emptySeat +"\n" +
 //                            "total Journey : " + totalJourney +"\n" +
 //                            "time : " + time +"\n");
-                    spfUserData.setSpfAgentRideDetails(carName, vehicleNumber, phoneNumber, date, emptySeat, null,time, null, null, null, null, null, null);
+                    spfUserData.setSpfAgentRideDetails(carName, vehicleNumber, phoneNumber, date, emptySeat, null,time, null, null, null, null, null, null, null);
                     getParentFragmentManager().beginTransaction().replace(R.id.frMainContainer, new AgentDetailFragment()).addToBackStack(null).commit();
 
                 }

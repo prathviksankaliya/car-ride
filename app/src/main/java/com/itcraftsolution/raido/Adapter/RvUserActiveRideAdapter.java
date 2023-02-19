@@ -8,14 +8,17 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.ConcatAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.itcraftsolution.raido.Fragments.UserRideDeatilsFragment;
 import com.itcraftsolution.raido.Models.AgentDetails;
 import com.itcraftsolution.raido.R;
 import com.itcraftsolution.raido.databinding.RvSearchRideBinding;
+import com.itcraftsolution.raido.spf.SpfUserData;
 
 import java.util.ArrayList;
 
@@ -24,10 +27,12 @@ public class RvUserActiveRideAdapter extends RecyclerView.Adapter<RvUserActiveRi
 
     Context context;
     ArrayList<AgentDetails> list;
+    SpfUserData spfUserData;
 
     public RvUserActiveRideAdapter(Context context, ArrayList<AgentDetails> list) {
         this.context = context;
         this.list = list;
+        spfUserData = new SpfUserData(context);
     }
 
     @NonNull
@@ -47,6 +52,21 @@ public class RvUserActiveRideAdapter extends RecyclerView.Adapter<RvUserActiveRi
             holder.binding.txRideCarName.setText(model.getCarName());
             holder.binding.txRideSeats.setText(model.getEmptySeats());
             holder.binding.txRidePrice.setText(model.getRidePrice());
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                        spfUserData.setSpfAgentRideDetails(model.getCarName(), model.getVehicalNumber(),
+                                model.getPhoneNumber(), model.getDate(), model.getEmptySeats(), model.getTotalJourney(),
+                                model.getTime(), model.getJourneySource(), model.getJourneyDestination(), model.getArrivalTime(), model.getDepTime(), model.getRidePrice(), model.getJourneyLoc()
+                                , model.getAgentId());
+
+                    ((FragmentActivity) context).getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.frUserMainContainer , new UserRideDeatilsFragment())
+                            .addToBackStack(null)
+                            .commit();
+                }
+            });
     }
 
     @Override

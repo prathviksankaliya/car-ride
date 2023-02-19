@@ -204,9 +204,9 @@ AgentDetailFragment extends Fragment {
                     String totalJourney = totalJourneyHours(arrivalTime, depTime);
                     String journeyLocs = showSelections();
                     spfUserData.setSpfAgentRideDetails(carName, vehicalNumber, phoneNumber, journeyDate, emptySeats, totalJourney, time,
-                            selectedDistrictSource, selectedDistrictDestination,arrivalTime, depTime,  ridePrice, journeyLocs);
+                            selectedDistrictSource, selectedDistrictDestination,arrivalTime, depTime,  ridePrice, journeyLocs, Objects.requireNonNull(auth.getCurrentUser()).getUid());
                     agentDetails = new AgentDetails(carName, vehicalNumber, phoneNumber, journeyDate, emptySeats, totalJourney, time,
-                            selectedDistrictSource, selectedDistrictDestination,arrivalTime, depTime,ridePrice, journeyLocs);
+                            selectedDistrictSource, selectedDistrictDestination,arrivalTime, depTime,ridePrice, journeyLocs, Objects.requireNonNull(auth.getCurrentUser()).getUid());
                     addDataIntoFirebaseDatabase();
                 }
 

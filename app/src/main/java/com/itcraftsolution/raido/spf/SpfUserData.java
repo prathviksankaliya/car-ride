@@ -31,7 +31,7 @@ public class SpfUserData {
     }
 
     public void setSpfAgentRideDetails(String carName, String vehicalNumber, String phoneNumber, String date, String emptySeats, String totalJourney, String time,
-                                       String journeySource, String journeyDestination,String arrivalTime, String depTime,  String ridePrice,String journeyLoc)
+                                       String journeySource, String journeyDestination,String arrivalTime, String depTime,  String ridePrice,String journeyLoc, String agentId)
     {
         SharedPreferences setSpfUserLoginDetails = context.getSharedPreferences("AgentRideDetails", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = setSpfUserLoginDetails.edit();
@@ -48,6 +48,7 @@ public class SpfUserData {
         editor.putString("agentDepTime", depTime);
         editor.putString("agentRidePrice", ridePrice);
         editor.putString("agentJourneyLoc", journeyLoc);
+        editor.putString("agentId", agentId);
         editor.apply();
     }
 
