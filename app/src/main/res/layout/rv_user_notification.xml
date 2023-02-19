@@ -39,7 +39,7 @@
             android:fontFamily="@font/opensanssemibold"
             android:layout_marginStart="@dimen/_8mdp"
             android:text="Your Ride request is Accept from Prathvik Sankaliya Car Agent."
-            android:textSize="@dimen/_14font_mdp"
+            android:textSize="@dimen/_12font_mdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/vBgRideReq"
             app:layout_constraintTop_toTopOf="@+id/vBgRideReq" />
@@ -79,7 +79,7 @@
                     android:layout_marginStart="@dimen/_3mdp"
                     android:fontFamily="@font/opensansbold"
                     android:text="kebfkuhekfbwekf94y984"
-                    android:textSize="@dimen/_14font_mdp" />
+                    android:textSize="@dimen/_12font_mdp" />
             </LinearLayout>
 
             <LinearLayout
@@ -106,7 +106,7 @@
                     android:fontFamily="@font/opensansbold"
                     android:maxLines="1"
                     android:text="AHM - BRD"
-                    android:textSize="@dimen/_16font_mdp" />
+                    android:textSize="@dimen/_14font_mdp" />
             </LinearLayout>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

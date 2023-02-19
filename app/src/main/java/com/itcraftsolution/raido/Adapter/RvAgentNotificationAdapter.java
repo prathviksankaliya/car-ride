@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -30,7 +31,7 @@ import java.util.HashMap;
 public class RvAgentNotificationAdapter extends RecyclerView.Adapter<RvAgentNotificationAdapter.viewHolder> {
     Context context;
     ArrayList<DemoModel> list;
-    DatabaseReference reqDbRef;
+    DatabaseReference reqDbRef, friendRef;
     FirebaseAuth auth;
     FirebaseDatabase database;
     SpfUserData spfUserData;
@@ -41,7 +42,8 @@ public class RvAgentNotificationAdapter extends RecyclerView.Adapter<RvAgentNoti
 
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
-        reqDbRef = database.getReference("Request");
+        reqDbRef = database.getReference("Requests");
+        friendRef = database.getReference("Friend");
         spfUserData = new SpfUserData(context);
     }
 
@@ -65,19 +67,29 @@ public class RvAgentNotificationAdapter extends RecyclerView.Adapter<RvAgentNoti
         holder.binding.btnAdminNotiAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                HashMap hashMap = new HashMap();
-                hashMap.put("agentid", auth.getUid());
-                hashMap.put("status", "accept");
-                hashMap.put("username", spfUserData.getSpfUserLoginDetails().getString("userName", null));
-                hashMap.put("journey", model.getUsersource() + "-" + model.getUserdestination());
-                reqDbRef.child(auth.getUid()).child(model.getUserid()).updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener() {
+                reqDbRef.child(auth.getUid()).child(model.getUserid()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
-                    public void onComplete(@NonNull Task task) {
+                    public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
-                            Toast.makeText(context, "Accept The User Request", Toast.LENGTH_SHORT).show();
+                            HashMap hashMap = new HashMap();
+                            hashMap.put("agentid", auth.getUid());
+                            hashMap.put("status", "accept");
+                            hashMap.put("username", spfUserData.getSpfUserLoginDetails().getString("userName", null));
+                            hashMap.put("journey", model.getUsersource() + "-" + model.getUserdestination());
+
+                            friendRef.child(model.getUserid()).child(auth.getUid()).updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener() {
+                                @Override
+                                public void onComplete(@NonNull Task task) {
+                                    if(task.isSuccessful()){
+                                        Toast.makeText(context, "Accept The User Request", Toast.LENGTH_SHORT).show();
+                                        list.remove(position);
+                                    }
+                                }
+                            });
                         }
                     }
                 });
+
             }
         });
 
