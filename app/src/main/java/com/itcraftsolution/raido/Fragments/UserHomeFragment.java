@@ -16,6 +16,7 @@ import android.widget.DatePicker;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -23,6 +24,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.itcraftsolution.raido.Models.AgentDetails;
 import com.itcraftsolution.raido.Models.LoginDetails;
 import com.itcraftsolution.raido.R;
 import com.itcraftsolution.raido.databinding.FragmentUserHomeBinding;
@@ -40,7 +42,7 @@ public class UserHomeFragment extends Fragment {
     private SpfUserData spfUserData;
     private FirebaseAuth auth;
     private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference databaseReference;
+    private DatabaseReference databaseReference, agentDatabaseRef;
     private ProgressDialog dialog;
     private String selectedDistrictFrom = null, selectedDistrictTo = null;
     private ArrayAdapter<CharSequence> districtAdapterFrom, districtAdapterTo;
@@ -54,6 +56,7 @@ public class UserHomeFragment extends Fragment {
         auth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("LoginDetails");
+        agentDatabaseRef = firebaseDatabase.getReference("AgentRideDetails");
         spfUserData = new SpfUserData(requireContext());
 
         dialog = new ProgressDialog(requireContext());
@@ -98,9 +101,10 @@ public class UserHomeFragment extends Fragment {
                     String date = binding.edUserDate.getText().toString();
                     String members = binding.edUserMember.getText().toString();
                     Toast.makeText(requireContext(), "Source city: "+ fromCity + "To city: "+ toCity + "date : "+date + "members: "+members, Toast.LENGTH_SHORT).show();
+                    spfUserData.setSpfUserSearchRide(fromCity, toCity, date, members);
+                    getParentFragmentManager().beginTransaction().replace(R.id.frUserMainContainer,
+                            new UserDetailRideFragment()).addToBackStack(null).commit();
                 }
-//                getParentFragmentManager().beginTransaction().replace(R.id.frUserMainContainer,
-//                        new UserDetailRideFragment()).addToBackStack(null).commit();
             }
         });
 
@@ -175,6 +179,7 @@ public class UserHomeFragment extends Fragment {
         String currentDate = simpleDateFormat.format(new Date());
         binding.edUserDate.setText(currentDate);
 
+
     }
 
     private void initSpinnerAdapters(){
@@ -182,5 +187,11 @@ public class UserHomeFragment extends Fragment {
         binding.spUserFrom.setAdapter(districtAdapterFrom);
         districtAdapterTo = ArrayAdapter.createFromResource(requireContext(), R.array.array_gujarat_districts_to, R.layout.spinner_layout);
         binding.spUserTo.setAdapter(districtAdapterTo);
+    }
+
+    private void searchRideIntoFirebase(){
+        FirebaseRecyclerOptions<AgentDetails> options = new FirebaseRecyclerOptions.Builder<AgentDetails>()
+                .setQuery(agentDatabaseRef.child(auth.getCurrentUser().getUid()).orderByChild("journeySource").startAt(selectedDistrictFrom).endAt(selectedDistrictFrom + "\uf8ff"), AgentDetails.class)
+                .build();
     }
 }

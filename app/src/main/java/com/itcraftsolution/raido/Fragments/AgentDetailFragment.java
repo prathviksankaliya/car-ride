@@ -35,7 +35,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
-public class AgentDetailFragment extends Fragment {
+public class
+AgentDetailFragment extends Fragment {
 
     private FragmentAgentDetailBinding binding;
     private ArrayList<String> arrayList;
@@ -244,8 +245,9 @@ public class AgentDetailFragment extends Fragment {
         selectedDistrictSource = null;
     }
 
+//    roots --
     private void addDataIntoFirebaseDatabase(){
-        databaseReference.child(Objects.requireNonNull(auth.getCurrentUser()).getUid()).setValue(agentDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
+        databaseReference.child("Roots").child(selectedDistrictSource + "_" + selectedDistrictDestination).child(Objects.requireNonNull(auth.getCurrentUser()).getUid()).setValue(agentDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
