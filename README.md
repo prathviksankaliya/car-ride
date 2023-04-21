@@ -30,7 +30,10 @@ Android (Java) | Material UI | Firebase
 
 # Application ScreenShots:
 
-<img src="https://github.com/prathviksankaliya/Status-Saver-For-Whatsapp/blob/master/Screenshots/screen_1.png" height="500px"><img src="https://github.com/prathviksankaliya/Status-Saver-For-Whatsapp/blob/master/Screenshots/screen_2.png" height="500px" hspace=24><img src="https://github.com/prathviksankaliya/Status-Saver-For-Whatsapp/blob/master/Screenshots/screen_3.png" height="500px"><br/>
-<img src="https://github.com/prathviksankaliya/Status-Saver-For-Whatsapp/blob/master/Screenshots/screen_4.png" height="500px"><img src="https://github.com/prathviksankaliya/Status-Saver-For-Whatsapp/blob/master/Screenshots/screen_5.png" height="500px" hspace=24><img src="https://github.com/prathviksankaliya/Status-Saver-For-Whatsapp/blob/master/Screenshots/screen_6.png" height="500px"><br/>
-<img src="https://github.com/prathviksankaliya/Status-Saver-For-Whatsapp/blob/master/Screenshots/screen_7.png" height="500px">
+<img src="https://github.com/prathviksankaliya/car-ride/blob/master/Screenshots/1.jpg" height="500px"><img src="https://github.com/prathviksankaliya/car-ride/blob/master/Screenshots/2.jpg" height="500px" hspace=18><img src="https://github.com/prathviksankaliya/car-ride/blob/master/Screenshots/3.jpg" height="500px">
+<img src="https://github.com/prathviksankaliya/car-ride/blob/master/Screenshots/7.jpg" height="500px" hspace=18>
+<br/>
+<img src="https://github.com/prathviksankaliya/car-ride/blob/master/Screenshots/8.jpg" height="500px"><img src="https://github.com/prathviksankaliya/car-ride/blob/master/Screenshots/9.jpg" height="500px" hspace=18><img src="https://github.com/prathviksankaliya/car-ride/blob/master/Screenshots/11.jpg" height="500px" hspace=18><img src="https://github.com/prathviksankaliya/car-ride/blob/master/Screenshots/A4.jpg" height="500px">
+<br/>
+<img src="https://github.com/prathviksankaliya/car-ride/blob/master/Screenshots/A5.jpg" height="500px"><img src="https://github.com/prathviksankaliya/car-ride/blob/master/Screenshots/A6.jpg" height="500px" hspace=18><img src="https://github.com/prathviksankaliya/car-ride/blob/master/Screenshots/A10.jpg" height="500px">
 
