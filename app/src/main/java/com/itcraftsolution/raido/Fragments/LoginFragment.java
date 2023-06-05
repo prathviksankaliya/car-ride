@@ -45,7 +45,7 @@ public class LoginFragment extends Fragment {
     private GoogleSignInClient googleSignInClient;
     private ActivityResultLauncher<Intent> signInActivityLauncher;
     private FirebaseAuth auth;
-    private String userNumber, verifyId;
+    private String userNumber, verifyId, userNumberWithoutCode;
     private SpfUserData spfUserData;
 
     public LoginFragment() {
@@ -69,6 +69,7 @@ public class LoginFragment extends Fragment {
                     binding.edLoginPhoneNumber.setError("Plz Enter Valid Number!!");
                 } else {
                     userNumber = "+91 " + binding.edLoginPhoneNumber.getText().toString();
+                    userNumberWithoutCode = binding.edLoginPhoneNumber.getText().toString();
                     binding.llVerifyOtp.setVisibility(View.VISIBLE);
                     binding.llGetOpt.setVisibility(View.GONE);
                     sendVerificationCode(userNumber);
@@ -184,7 +185,7 @@ public class LoginFragment extends Fragment {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    spfUserData.setSpfUserLoginDetails(null, null, null, userNumber, null, null);
+                    spfUserData.setSpfUserLoginDetails(null, null, null, userNumberWithoutCode, null, null);
                     getParentFragmentManager().beginTransaction().replace(R.id.frLoginContainer,
                             new LoginProfileFragment()).addToBackStack(null).commit();
                 } else {

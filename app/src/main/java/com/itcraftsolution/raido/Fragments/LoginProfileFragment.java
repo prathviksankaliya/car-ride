@@ -236,8 +236,10 @@ public class LoginProfileFragment extends Fragment {
             binding.edLoginName.setText(account.getDisplayName());
             binding.edLoginEmail.setText(account.getEmail());
             binding.textInputLayout8.setFocusable(false);
+            binding.edLoginEmail.setEnabled(false);
         }else{
             binding.edLoginPhoneNumber.setText(loginPhoneNumber);
+            binding.edLoginPhoneNumber.setEnabled(false);
             binding.textInputLayout.setFocusable(false);
         }
     }

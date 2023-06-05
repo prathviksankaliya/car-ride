@@ -152,6 +152,7 @@
         style="@style/iconColor"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:hint="Add Hold Points"
         android:layout_marginEnd="@dimen/_8mdp"
         android:layout_marginTop="@dimen/_10mdp"
         android:textColorHint="@color/lightBlack"
@@ -168,14 +169,14 @@
             android:textColor="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Spinner
-        android:id="@+id/spAdminJourneyLoc"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textInputLayout7"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayout7"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout12"
-        app:layout_constraintTop_toTopOf="@+id/textInputLayout7" />
+<!--    <Spinner-->
+<!--        android:id="@+id/spAdminJourneyLoc"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/textInputLayout7"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/textInputLayout7"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/textInputLayout12"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/textInputLayout7" />-->
 
     <Button
         android:id="@+id/btnAdminJourneyAdd"

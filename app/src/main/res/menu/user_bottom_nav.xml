@@ -15,12 +15,6 @@
 
     <item
         android:menuCategory="secondary"
-        android:id="@+id/userNavAddCar"
-        android:icon="@drawable/car"
-        />
-
-    <item
-        android:menuCategory="secondary"
         android:id="@+id/userNavProfile"
         android:icon="@drawable/user"
         />

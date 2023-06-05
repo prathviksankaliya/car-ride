@@ -42,9 +42,9 @@ public class UserRideActivity extends AppCompatActivity {
                         temp = new UserNotificationFragment();
                         break;
 
-                    case R.id.userNavAddCar:
-                        temp = new UserCarBookFragment();
-                        break;
+//                    case R.id.userNavAddCar:
+//                        temp = new UserCarBookFragment();
+//                        break;
 
                     case R.id.userNavProfile:
                         temp = new UserProfileFragment();
